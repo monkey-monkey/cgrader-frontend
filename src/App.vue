@@ -10,10 +10,6 @@
             href="#responsive-header"
             class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4"
           >Docs</a>
-          <a
-            href="#responsive-header"
-            class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4"
-          >Examples</a>
         </div>
       </div>
     </nav>
