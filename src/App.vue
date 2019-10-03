@@ -5,4 +5,5 @@
 </template>
 
 <style lang="scss">
+@import "@/assets/css/tailwind.scss";
 </style>
