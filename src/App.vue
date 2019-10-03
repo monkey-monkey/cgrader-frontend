@@ -3,7 +3,6 @@
     <nav class="flex items-center justify-between flex-wrap bg-orange-700 p-3">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <img class="h-16 w-full" src="@/assets/logo_transparent_crop.png">
-        <!-- <span class="font-semibold text-xl tracking-tight">C Grader</span> -->
       </div>
       <div class="block lg:hidden">
         <button
