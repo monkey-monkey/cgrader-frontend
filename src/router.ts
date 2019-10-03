@@ -16,22 +16,22 @@ export default new Router({
     {
       path: "/docs",
       name: "Documentation",
-      component: () => import(/* webpackChunkName: "about" */ "./views/Docs.vue"),
+      component: () => import(/* webpackChunkName: "docs" */ "./views/Docs.vue"),
     },
     {
       path: "/problems",
       name: "Problems",
-      component: () => import(/* webpackChunkName: "about" */ "./views/Problems.vue"),
+      component: () => import(/* webpackChunkName: "problems" */ "./views/Problems.vue"),
     },
     {
       path: "/problem",
       name: "Problem",
-      component: () => import(/* webpackChunkName: "about" */ "./views/Problem.vue"),
+      component: () => import(/* webpackChunkName: "problem" */ "./views/Problem.vue"),
     },
     {
       path: "/profile",
       name: "Profile",
-      component: () => import(/* webpackChunkName: "about" */ "./views/Profile.vue"),
+      component: () => import(/* webpackChunkName: "profile" */ "./views/Profile.vue"),
     },
   ],
 });
