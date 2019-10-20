@@ -6,9 +6,8 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 
 Vue.config.productionTip = false;
-
 Vue.use(VueAxios, axios.create({
-  baseURL: process.env.VUE_API_BASE_URL,
+  baseURL: process.env.VUE_APP_BASE_URL,
 }));
 
 new Vue({
