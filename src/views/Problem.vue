@@ -43,10 +43,11 @@
         </div>
         <div class="flex items-center mb-8">
           <div class="mr-4">Upload file</div>
-          <label class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <label class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded">
             <input type="file" class="hidden" @change="handleFileUpload" />
             Select file
           </label>
+          <div v-if="srcFile">{{ srcFile.name }}</div>
         </div>
         <div class="flex w-full justify-center">
           <button
@@ -114,8 +115,8 @@ export default class Problems extends Vue {
   }
 
   private handleFileUpload(el: any) {
-    if(el){
-      console.log(el.currentTarget.files[0].type);
+    if (el) {
+      this.srcFile = el.currentTarget.files[0];
     }
   }
 }
