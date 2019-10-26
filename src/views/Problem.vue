@@ -1,11 +1,7 @@
 <template>
   <div class="container lg:px-40 md:px-36 pt-8">
     <div v-if="problem">
-      <div class="flex flex-col items-center">
-        <div class="text-4xl">{{ `${problem.code}: ${problem.name}` }}</div>
-        <div class="text-base">Time limit: {{ problem.timeLimit }} sec</div>
-        <div class="text-base">Memory limit: {{ problem.memLimit }} MiB</div>
-      </div>
+      <ProblemHeader v-if="problemDetail" :problemHeader="problemDetail" />
       <hr class="m-4" />
       <div class="flex items-center">
         <div class="mr-4">Problem file</div>
@@ -66,12 +62,14 @@
 
 <script lang="ts">
 import { Component, Vue, Model } from "vue-property-decorator";
-import { IProblem, FileDetail } from "@/types/problems";
+import { IProblem, FileDetail, ProblemDetail } from "@/types/problems";
 import Loader from "@/components/Loader.vue";
+import ProblemHeader from "@/components/ProblemHeader.vue";
 
 @Component({
   components: {
-    Loader
+    Loader,
+    ProblemHeader
   }
 })
 export default class Problems extends Vue {
@@ -92,6 +90,17 @@ export default class Problems extends Vue {
       `problem/${code}/file`
     );
     this.problem!.problemUrl = fileResponse.data.signedUrl;
+  }
+
+  public get problemDetail(): ProblemDetail | null {
+    return this.problem
+      ? {
+          name: this.problem.name,
+          code: this.problem.code,
+          timeLimit: this.problem.timeLimit,
+          memLimit: this.problem.memLimit
+        }
+      : null;
   }
 
   private handleChange(value: string) {
