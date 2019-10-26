@@ -12,3 +12,10 @@ export interface FileDetail {
     contentType: string;
     signedUrl: string;
 }
+
+export interface ProblemDetail {
+    name: string;
+    code: string;
+    timeLimit: number;
+    memLimit: number;
+}
