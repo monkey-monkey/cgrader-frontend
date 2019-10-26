@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <tr
-          :key="problem.code"
+          :key="problem._id"
           v-for="problem of problems"
           class="hover:bg-gray-300 py-4 border-b"
           @click="onClick(problem.code)"
