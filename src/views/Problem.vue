@@ -7,16 +7,18 @@
         <div class="mr-4">Problem file</div>
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          @click="openPdfFile()"
         >Open file</button>
       </div>
       <hr class="m-4" />
       <div class="mb-8">Submit Code</div>
-      <form enctype="multipart/form-data" class="pl-4">
+      <div class="pl-4">
         <div class="flex items-center mb-4">
           <div class="mr-4">Language</div>
           <div class="inline-block relative w-64">
             <select
               class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              v-model="lang"
             >
               <option
                 v-for="option in options"
@@ -42,17 +44,16 @@
         <div class="flex items-center mb-8">
           <div class="mr-4">Upload file</div>
           <label class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            <input type="file" class="hidden" @change="handleChange($event.target.value)" />
+            <input type="file" class="hidden" @change="handleFileUpload" />
             Select file
           </label>
         </div>
         <div class="flex w-full justify-center">
           <button
-            type="submit"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >Submit</button>
         </div>
-      </form>
+      </div>
     </div>
     <div v-else>
       <Loader />
@@ -61,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Model } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { IProblem, FileDetail, ProblemDetail } from "@/types/problems";
 import Loader from "@/components/Loader.vue";
 import ProblemHeader from "@/components/ProblemHeader.vue";
@@ -73,8 +74,7 @@ import ProblemHeader from "@/components/ProblemHeader.vue";
   }
 })
 export default class Problems extends Vue {
-  // @Model() private lang: string = "";
-
+  private lang: string = "";
   private problem: IProblem | null = null;
   private srcFile: string | null = null;
   private readonly options = [
@@ -103,8 +103,20 @@ export default class Problems extends Vue {
       : null;
   }
 
+  private openPdfFile() {
+    if (this.problem) {
+      window.open(this.problem!.problemUrl, "_blank");
+    }
+  }
+
   private handleChange(value: string) {
     this.srcFile = value;
+  }
+
+  private handleFileUpload(el: any) {
+    if(el){
+      console.log(el.currentTarget.files[0].type);
+    }
   }
 }
 </script>
