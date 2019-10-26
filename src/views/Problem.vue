@@ -1,55 +1,84 @@
 <template>
   <div class="container lg:px-40 md:px-36 pt-8">
     <div v-if="problem">
-      <h1 class="text-3xl font-medium pb-3 text-center">{{ `${problem.code}: ${problem.name}` }}</h1>
-      <p class="text-center p-1">Time limit: {{ problem.timeLimit }} sec</p>
-      <p class="text-center p-1">Memory limit: {{ problem.memLimit }} MiB</p>
+      <div class="flex flex-col items-center">
+        <div class="text-4xl">{{ `${problem.code}: ${problem.name}` }}</div>
+        <div class="text-base">Time limit: {{ problem.timeLimit }} sec</div>
+        <div class="text-base">Memory limit: {{ problem.memLimit }} MiB</div>
+      </div>
       <hr class="m-4" />
-      <!-- <pdf :src="problem.fileUrl"></pdf> -->
+      <div class="flex items-center">
+        <div class="mr-4">Problem file</div>
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >Open file</button>
+      </div>
       <hr class="m-4" />
-      <form enctype="multipart/form-data">
-        <h2 class="text-xl font-medium p-3">Submit code</h2>
-        <h4 class="text-md p-3">Language</h4>
-        <select v-model="lang" class="p-3">
-          <option disabled value>Select Language</option>
-          <option
-            v-for="option in options"
-            :key="option.value"
-            :value="option.value"
-          >{{ option.text }}</option>
-        </select>
-        <h4 class="text-md p-3">Upload file</h4>
-        <input
-          class="p-3 text-md"
-          type="file"
-          ref="file"
-          @change="handleChange($event.target.value)"
-        />
-        <button type="submit">Submit</button>
+      <div class="mb-8">Submit Code</div>
+      <form enctype="multipart/form-data" class="pl-4">
+        <div class="flex items-center mb-4">
+          <div class="mr-4">Language</div>
+          <div class="inline-block relative w-64">
+            <select
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option
+                v-for="option in options"
+                :key="option.value"
+                :value="option.value"
+              >{{ option.text }}</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            >
+              <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center mb-8">
+          <div class="mr-4">Upload file</div>
+          <label class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <input type="file" class="hidden" @change="handleChange($event.target.value)" />
+            Select file
+          </label>
+        </div>
+        <div class="flex w-full justify-center">
+          <button
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >Submit</button>
+        </div>
       </form>
     </div>
     <div v-else>
-      <h1 class="text-3xl font-medium pb-3 text-center">Loading...</h1>
+      <Loader />
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
-
 <script lang="ts">
 import { Component, Vue, Model } from "vue-property-decorator";
 import { IProblem, FileDetail } from "@/types/problems";
-// import pdf from 'vue-pdf';
+import Loader from "@/components/Loader.vue";
+
 @Component({
-  // components: {
-  //   pdf,
-  // },
+  components: {
+    Loader
+  }
 })
 export default class Problems extends Vue {
+  // @Model() private lang: string = "";
+
   private problem: IProblem | null = null;
   private srcFile: string | null = null;
-  @Model() lang: string = "";
   private readonly options = [
     { text: "C", value: "c" },
     { text: "C++", value: "cpp" }
