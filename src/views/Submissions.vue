@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import moment from 'moment-timezone';
+import moment from "moment-timezone";
 
 @Component
 export default class Submissions extends Vue {
@@ -44,11 +44,11 @@ export default class Submissions extends Vue {
   }
 
   private getClass(index: number) {
-    return index % 2 === 0 ? 'bg-gray-200' : null;
+    return index % 2 === 0 ? "bg-gray-200" : null;
   }
 
   private formatDate(timestamps: number) {
-    return moment(timestamps).tz('Asia/Bangkok').format("DD/MM/YYYY HH:MM");
+    return moment(timestamps).tz("Asia/Bangkok").format("DD/MM/YYYY HH:MM");
   }
 }
 </script>
