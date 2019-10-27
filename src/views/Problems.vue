@@ -17,18 +17,15 @@
           class="hover:bg-gray-300 py-4 border-b"
           @click="onClick(problem.code)"
         >
-          <td class="p-4 text-center">{{ problem.code }}</td>
-          <td class="p-4 text-center">{{ problem.name }}</td>
-          <td class="p-4 text-center">{{ problem.timeLimit }}</td>
-          <td class="p-4 text-center">{{ problem.memLimit }}</td>
+          <td class="px-4 py-3 text-center">{{ problem.code }}</td>
+          <td class="px-4 py-3 text-center">{{ problem.name }}</td>
+          <td class="px-4 py-3 text-center">{{ problem.timeLimit }}</td>
+          <td class="px-4 py-3 text-center">{{ problem.memLimit }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
-
-<style lang="scss" scoped>
-</style>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
