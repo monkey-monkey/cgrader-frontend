@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -12,6 +12,14 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home,
+      // beforeEnter: (to, from, next) => {
+      //   const token = Vue.cookies.get("authToken");
+      //   if (!token) {
+      //     window.location.href = `${process.env.VUE_APP_BASE_URL}/auth/login`;
+      //   } else {
+      //     next();
+      //   }
+      // },
     },
     {
       path: "/docs",
@@ -40,3 +48,14 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  const token = Vue.cookies.get("authToken");
+  if (!token) {
+    window.location.href = `${process.env.VUE_APP_BASE_URL}/auth/login`;
+  } else {
+    next();
+  }
+});
+
+export default router;
