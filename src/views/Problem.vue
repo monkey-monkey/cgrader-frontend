@@ -125,7 +125,7 @@ export default class Problems extends Vue {
     formData.append("problemId", this.problem!._id);
     formData.append("lang", this.lang);
     this.axios.post("submission", formData);
-    this.$router.push("/submission");
+    this.$router.push("/submissions");
   }
 }
 </script>
