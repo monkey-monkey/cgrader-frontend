@@ -5,7 +5,7 @@
       <div class="flex-1 flex justify-around">
         <router-link class="text-white hover:text-orange-300" to="/" >Home</router-link>
         <router-link class="text-white hover:text-orange-300" to="/problems" >Problems</router-link>
-        <router-link class="text-white hover:text-orange-300" to="/docs" >Docs</router-link>
+        <router-link class="text-white hover:text-orange-300" to="/submission">Submission</router-link>
       </div>
     </nav>
     <router-view />
