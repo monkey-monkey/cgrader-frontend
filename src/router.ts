@@ -12,14 +12,6 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home,
-      // beforeEnter: (to, from, next) => {
-      //   const token = Vue.cookies.get("authToken");
-      //   if (!token) {
-      //     window.location.href = `${process.env.VUE_APP_BASE_URL}/auth/login`;
-      //   } else {
-      //     next();
-      //   }
-      // },
     },
     {
       path: "/docs",
@@ -52,7 +44,13 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const token = Vue.cookies.get("authToken");
   if (!token) {
-    window.location.href = `${process.env.VUE_APP_BASE_URL}/auth/login`;
+    if (process.env.VUE_APP_DEBUG) {
+      // tslint:disable-next-line: no-console
+      console.warn("There is no AuthToken in cookie, authentication required feature might not work");
+      next();
+    } else {
+      window.location.href = `${process.env.VUE_APP_BASE_URL}/auth/login`;
+    }
   } else {
     next();
   }
