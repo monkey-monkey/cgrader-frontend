@@ -73,8 +73,8 @@ import * as jwt from "jsonwebtoken";
 @Component({
   components: {
     Loader,
-    ProblemHeader,
-  },
+    ProblemHeader
+  }
 })
 export default class Problems extends Vue {
   private lang: string = "";
@@ -82,7 +82,7 @@ export default class Problems extends Vue {
   private srcFile: string | null = null;
   private readonly options = [
     { text: "C", value: "c" },
-    { text: "C++", value: "cpp" },
+    { text: "C++", value: "cpp" }
   ];
 
   private async mounted() {
@@ -90,7 +90,7 @@ export default class Problems extends Vue {
     const problemResponse = await this.axios.get<IProblem>(`problem/${code}`);
     this.problem = problemResponse.data;
     const fileResponse = await this.axios.get<FileDetail>(
-      `problem/${code}/file`,
+      `problem/${code}/file`
     );
     this.problem!.problemUrl = fileResponse.data.signedUrl;
   }
@@ -101,7 +101,7 @@ export default class Problems extends Vue {
           name: this.problem.name,
           code: this.problem.code,
           timeLimit: this.problem.timeLimit,
-          memLimit: this.problem.memLimit,
+          memLimit: this.problem.memLimit
         }
       : null;
   }
@@ -112,9 +112,20 @@ export default class Problems extends Vue {
     }
   }
 
+  private getFileExtension(file: File): string {
+    const arr = file.name.split('.');
+    return arr[arr.length - 1];
+  }
+
   private handleFileUpload(e: any) {
     if (e) {
-      this.srcFile = e.currentTarget.files[0];
+      const file = e.currentTarget.files[0];
+      const ext = this.getFileExtension(file);
+      if (ext === 'c' || ext === 'cpp') {
+        this.srcFile = file;
+      } else {
+        alert('Please upload only C/C++ file');
+      }
     }
   }
 
