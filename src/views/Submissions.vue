@@ -20,7 +20,7 @@
         >
           <td class="px-4 py-2 text-center border">{{ submissions.length - index }}</td>
           <td class="px-4 py-2 text-center border">{{ formatDate(submission.createdAt) }}</td>
-          <td class="px-4 py-2 text-center border">{{ submission.user.username }}</td>
+          <td class="px-4 py-2 text-center border">{{ submission.user ? submission.user.username : "-" }}</td>
           <td class="px-4 py-2 text-center border">{{ submission.problem.code }}</td>
           <td class="px-4 py-2 text-center border">{{ submission.lang }}</td>
           <td class="px-4 py-2 text-center border font-mono">{{ submission.result }}</td>
