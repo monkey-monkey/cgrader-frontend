@@ -16,11 +16,13 @@
         <tr
           v-for="(submission, index) of submissions"
           :key="submission._id"
-          :class="getClass(index)"
+          :class="getClass(submission.result, index)"
         >
           <td class="px-4 py-2 text-center border">{{ submissions.length - index }}</td>
           <td class="px-4 py-2 text-center border">{{ formatDate(submission.createdAt) }}</td>
-          <td class="px-4 py-2 text-center border">{{ submission.user ? submission.user.username : "-" }}</td>
+          <td
+            class="px-4 py-2 text-center border"
+          >{{ submission.user ? submission.user.username : "-" }}</td>
           <td class="px-4 py-2 text-center border">{{ submission.problem.code }}</td>
           <td class="px-4 py-2 text-center border">{{ submission.lang }}</td>
           <td class="px-4 py-2 text-center border font-mono">{{ submission.result }}</td>
@@ -43,12 +45,19 @@ export default class Submissions extends Vue {
     this.submissions = response.data.reverse();
   }
 
-  private getClass(index: number) {
-    return index % 2 === 0 ? "bg-gray-200" : null;
+  private getClass(result: string, index: number) {
+    const acceptedRegex = RegExp(/^P+$/);
+    return acceptedRegex.test(result)
+      ? "bg-green-200"
+      : index % 2 === 0
+      ? "bg-gray-200"
+      : null;
   }
 
   private formatDate(timestamps: number) {
-    return moment(timestamps).tz("Asia/Bangkok").format("DD/MM/YYYY HH:mm");
+    return moment(timestamps)
+      .tz("Asia/Bangkok")
+      .format("DD/MM/YYYY HH:mm");
   }
 }
 </script>
