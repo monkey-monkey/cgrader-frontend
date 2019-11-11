@@ -48,7 +48,7 @@ export default class Submissions extends Vue {
   }
 
   private formatDate(timestamps: number) {
-    return moment(timestamps).tz("Asia/Bangkok").format("DD/MM/YYYY HH:MM");
+    return moment(timestamps).tz("Asia/Bangkok").format("DD/MM/YYYY HH:mm");
   }
 }
 </script>
