@@ -2,7 +2,8 @@ version: 2
 jobs:
   build_master:
     working_directory: ~/project
-    machine: true
+    docker:
+      - image: circleci/node:10
     steps:
       - checkout
       - restore_cache:
