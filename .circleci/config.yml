@@ -34,7 +34,7 @@ jobs:
           at: .
       - run:
           name: Copy to VM
-          command: scp -r ./dist circleci@grader.monkeyatc.com:/var/www/html
+          command: scp -r circleci@grader.monkeyatc.com:/var/www/html ./dist/.
 
 workflows:
   version: 2
