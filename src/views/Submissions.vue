@@ -42,7 +42,7 @@ export default class Submissions extends Vue {
 
   private async mounted() {
     const response = await this.axios.get("submission");
-    this.submissions = response.data.reverse();
+    this.submissions = response.data;
   }
 
   private getClass(result: string, index: number) {
