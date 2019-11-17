@@ -13,6 +13,13 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
+      - run:
+          name: Create .env
+          command: |
+            cat > .env << EOF1
+            VUE_APP_BASE_URL=https://grader.monkeyatc.com/api
+            VUE_APP_DEBUG=false
+            EOF1
       - run: yarn build
       - persist_to_workspace:
           root: ~/project
@@ -25,14 +32,6 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: Send env
-          command: |
-            cat > .env << EOF1
-            VUE_APP_BASE_URL=https://grader.monkeyatc.com/api
-            VUE_APP_DEBUG=false
-            EOF1
-            scp ./.env circleci@grader.monkeyatc.com:/var/www/html
       - run:
           name: Copy to VM
           command: scp -r ./dist circleci@grader.monkeyatc.com:/var/www/html
