@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>This is home page</h1>
+  <div class="text-6xl flex w-full justify-center text-orange-700">
+    This is beautiful home page
   </div>
 </template>
 
