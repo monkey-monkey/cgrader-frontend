@@ -132,15 +132,13 @@ export default class Problems extends Vue {
 
   private handleSubmit(e: any) {
     e.preventDefault();
-    const token: string = this.$cookies.get("authToken") as string;
-    const { userId } = jwt.verify(token, process.env
-      .VUE_APP_SECRET as string) as { userId: string };
     const formData = new FormData();
     formData.append("file", this.srcFile!);
-    formData.append("userId", userId);
     formData.append("problemId", this.problem!._id);
     formData.append("lang", this.lang);
-    this.axios.post("submission", formData);
+    this.axios.post("submission", formData, {
+      headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` },
+    });
     this.$router.push("/submissions");
   }
 }

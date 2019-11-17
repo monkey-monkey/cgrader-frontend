@@ -25,14 +25,14 @@ import Logout from "@/components/Logout.vue";
 
 @Component({
   components: {
-    Logout
-  }
+    Logout,
+  },
 })
 export default class App extends Vue {
   private routes = [
     { label: "Home", to: "/" },
     { label: "Problems", to: "/problems" },
-    { label: "Submissions", to: "/submissions" }
+    { label: "Submissions", to: "/submissions" },
   ];
   private loggedIn() {
     return Vue.cookies.get("authToken");

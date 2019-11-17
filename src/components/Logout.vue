@@ -10,7 +10,7 @@ import { Vue, Component } from "vue-property-decorator";
 @Component
 export default class Logout extends Vue {
   private logout() {
-    Vue.cookies.remove('authToken');
+    Vue.cookies.remove("authToken");
     location.reload();
   }
 }
