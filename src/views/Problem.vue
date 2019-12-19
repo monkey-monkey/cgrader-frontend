@@ -74,8 +74,8 @@ import * as jwt from "jsonwebtoken";
 @Component({
   components: {
     Loader,
-    ProblemHeader,
-  },
+    ProblemHeader
+  }
 })
 export default class Problems extends Vue {
   private lang: string = "";
@@ -83,15 +83,17 @@ export default class Problems extends Vue {
   private srcFile: string | null = null;
   private readonly options = [
     { text: "C", value: "c" },
-    { text: "C++", value: "cpp" },
+    { text: "C++", value: "cpp" }
   ];
 
   private async mounted() {
     const code = this.$route.params.code;
-    const problemResponse = await this.axios.get<IProblem>(`problem/${code}`);
+    const problemResponse = await this.axios.get<IProblem>(`problem/${code}`, {
+      headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` }
+    });
     this.problem = problemResponse.data;
     const fileResponse = await this.axios.get<FileDetail>(
-      `problem/${code}/file`,
+      `problem/${code}/file`
     );
     this.problem!.problemUrl = fileResponse.data.signedUrl;
   }
@@ -102,7 +104,7 @@ export default class Problems extends Vue {
           name: this.problem.name,
           code: this.problem.code,
           timeLimit: this.problem.timeLimit,
-          memLimit: this.problem.memLimit,
+          memLimit: this.problem.memLimit
         }
       : null;
   }
@@ -137,7 +139,7 @@ export default class Problems extends Vue {
     formData.append("problemId", this.problem!._id);
     formData.append("lang", this.lang);
     this.axios.post("submission", formData, {
-      headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` },
+      headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` }
     });
     this.$router.push("/submissions");
   }
