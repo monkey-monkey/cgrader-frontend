@@ -94,6 +94,9 @@ export default class Problems extends Vue {
     this.problem = problemResponse.data;
     const fileResponse = await this.axios.get<FileDetail>(
       `problem/${code}/file`,
+      {
+        headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` },
+      },
     );
     this.problem!.problemUrl = fileResponse.data.signedUrl;
   }
