@@ -42,7 +42,7 @@ export default class Submissions extends Vue {
 
   private async mounted() {
     const response = await this.axios.get("submission", {
-      headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` }
+      headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` },
     });
     this.submissions = response.data;
   }
