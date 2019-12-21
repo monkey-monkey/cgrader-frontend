@@ -1,5 +1,8 @@
 <template>
-  <div class="container lg:px-40 md:px-36 pt-8 pb-16">
+  <div v-if="isLoading">
+    <Loader />
+  </div>
+  <div v-else class="container lg:px-40 md:px-36 pt-8 pb-16">
     <h1 class="text-3xl font-semibold pb-8">Submissions</h1>
     <table class="table-fixed w-full">
       <thead>
@@ -34,17 +37,24 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Loader from "@/components/Loader.vue";
 import moment from "moment-timezone";
 
-@Component
+@Component({
+  components: {
+    Loader,
+  },
+})
 export default class Submissions extends Vue {
   private submissions = [];
+  private isLoading = true;
 
   private async mounted() {
     const response = await this.axios.get("submission", {
       headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` },
     });
     this.submissions = response.data;
+    this.isLoading = false;
   }
 
   private getClass(result: string, index: number) {
