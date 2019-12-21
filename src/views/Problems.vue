@@ -14,7 +14,7 @@
         <tr
           :key="problem._id"
           v-for="problem of problems"
-          class="hover:bg-gray-300 py-4 border-b"
+          :class="getClass(problem.isPublic)"
           @click="onClick(problem.code)"
         >
           <td class="px-4 py-3 text-center">{{ problem.code }}</td>
@@ -39,6 +39,10 @@ export default class Problems extends Vue {
       headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` },
     });
     this.problems = response.data;
+  }
+
+  private getClass(isPublic: boolean) {
+    return isPublic ? "hover:bg-gray-300 py-4 border-b" : "hover:bg-gray-300 text-gray-500 hover:text-black py-4 border-b";
   }
 
   private onClick(code: string) {
