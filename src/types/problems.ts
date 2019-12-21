@@ -5,6 +5,7 @@ export interface IProblem {
     timeLimit: number;
     memLimit: number;
     testCases: number;
+    isPublic: boolean;
     problemUrl?: string;
 }
 
