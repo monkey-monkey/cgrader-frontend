@@ -25,7 +25,7 @@
           >{{ submission.user ? submission.user.username : "-" }}</td>
           <td class="px-4 py-2 text-center border">{{ submission.problem.code }}</td>
           <td class="px-4 py-2 text-center border">{{ submission.lang }}</td>
-          <td class="px-4 py-2 text-center border font-mono">{{ submission.result }}</td>
+          <td class="px-4 py-2 text-center border font-mono break-all">{{ submission.result }}</td>
         </tr>
       </tbody>
     </table>
