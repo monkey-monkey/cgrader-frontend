@@ -135,13 +135,13 @@ export default class Problems extends Vue {
     }
   }
 
-  private handleSubmit(e: any) {
+  private async handleSubmit(e: any) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", this.srcFile!);
     formData.append("problemId", this.problem!._id);
     formData.append("lang", this.lang);
-    this.axios.post("submission", formData, {
+    await this.axios.post("submission", formData, {
       headers: { authorization: `Bearer ${this.$cookies.get("authToken")}` },
     });
     this.$router.push("/submissions");
