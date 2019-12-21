@@ -1,5 +1,5 @@
 <template>
-  <div class="container lg:px-40 md:px-36 pt-8">
+  <div class="container lg:px-40 md:px-36 pt-8 pb-16">
     <h1 class="text-3xl font-semibold pb-8">Submissions</h1>
     <table class="table-fixed w-full">
       <thead>
